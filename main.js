@@ -103,26 +103,28 @@ function randomWithTrue() {
 }
 
 var finishedItems = 0
+var countUl = 2
 
 function createLine(array) {
     const listArray = document.getElementById('items')
-    let countUl = 1
+    countUl = 1
     let listItems = createElement('ul', '', ['list-reset', 'right__column'])
     listArray.append(listItems)
     let bonusIts = false
     for (const text of array) {
+        if (checkBreakPoints(breakPoints, countUl) === true) {
+            listItems = createElement('ul', '', ['list-reset', 'right__column'])
+            listArray.append(listItems)
+        }
         if (randomWithTrue() === true && bonusIts === false) {
             createItem(listItems, 'Bonus!')
             bonusIts = true
             countUl++
             continue
+        } else {
+            createItem(listItems, text)
+            countUl++
         }
-        if (checkBreakPoints(breakPoints, countUl) === true) {
-            listItems = createElement('ul', '', ['list-reset', 'right__column'])
-            listArray.append(listItems)
-        }
-        createItem(listItems, text)
-        countUl++
     }
 }
 
@@ -139,6 +141,7 @@ function startGame(array, progText, itemsArray) {
 
 function finishGame(array, progText, itemsArray) {
     itemsArray.textContent = ''
+    finishedItems = 0
     progText.textContent = '0%'
     const startBtn = createElement('button', 'Начать', ['btn-reset', 'start-btn'])
     array.append(startBtn)
