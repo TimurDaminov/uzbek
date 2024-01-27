@@ -103,7 +103,7 @@ function randomWithTrue() {
 }
 
 var finishedItems = 0
-var countUl = 2
+var countUl = 1
 
 function createLine(array) {
     const listArray = document.getElementById('items')
